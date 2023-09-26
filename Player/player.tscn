@@ -1,13 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://bis0xjgwn8ocm"]
+[gd_scene load_steps=7 format=3 uid="uid://bis0xjgwn8ocm"]
 
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_kwa5f"]
 [ext_resource type="Texture2D" uid="uid://cxo18t131yaex" path="res://Assets/Exhaust.png" id="2_2s7b6"]
-[ext_resource type="Texture2D" uid="uid://b3ojp8b76ubtl" path="res://Assets/Player.png" id="3_wnc0q"]
+[ext_resource type="Texture2D" uid="uid://bejju73ytdwnu" path="res://Assets/blueandblack.png" id="3_d204b"]
+[ext_resource type="Texture2D" uid="uid://c3mkvaxwmvgd8" path="res://Assets/fullshield1.png" id="4_f360h"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_w1esq"]
-radius = 35.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_gxmyt"]
+radius = 58.4209
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2fb6y"]
+radius = 76.0029
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_kwa5f")
 metadata/_edit_group_ = true
 
@@ -17,7 +22,7 @@ position = Vector2(0, 50)
 texture = ExtResource("2_2s7b6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("3_wnc0q")
+texture = ExtResource("3_d204b")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -26,6 +31,17 @@ polygon = PackedVector2Array(5, -25.2, 5, -22.5, 28.3, 17, 27.2, 19, 25.9, 19, 1
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_w1esq")
+shape = SubResource("CircleShape2D_gxmyt")
+
+[node name="Shield" type="Area2D" parent="."]
+
+[node name="Sprite" type="Sprite2D" parent="Shield"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_f360h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shield"]
+shape = SubResource("CircleShape2D_2fb6y")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Shield" to="." method="_on_shield_area_entered"]
+[connection signal="body_entered" from="Shield" to="." method="_on_shield_body_entered"]
