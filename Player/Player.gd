@@ -10,6 +10,15 @@ var Bullet=load("res://Player/bullet.tscn")
 var Effects=null
 var Explosion=load("res://Effects/explosion.tscn")
 
+var shields=0
+var shields_regen=0.01
+var shield_max=50.0
+var shield_textures= [
+	preload("res://Assets/fullshield1.png"),
+	preload("res://Assets/halfshield1.png"),
+	preload("res://Assets/lowshield1.png")
+]
+
 func get_input():
 	var to_return = Vector2.ZERO
 	$Exhaust.hide()
@@ -34,6 +43,21 @@ func _physics_process(_delta):
 	print(velocity.length())
 	
 	move_and_slide()
+	
+	shields= clamp(shields + shields_regen,-100,shield_max)
+	if shields>=shield_max:
+		$Shield.hide()
+	elif shields>=shield_max*0.75:
+		$Shield.show()
+		$Shield/Sprite.texture= shield_textures[0]
+	elif shields>=shield_max*0.4:
+		$Shield.show()
+		$Shield/Sprite.texture= shield_textures[1]
+	elif shields>0:
+		$Shield.show()
+		$Shield/Sprite.texture= shield_textures[2]
+	else:
+		$Shield.hide()
 	
 	if Input.is_action_just_pressed("Shoot"):
 		var bullet=Bullet.instantiate()
@@ -61,3 +85,18 @@ func damage(d):
 func _on_area_2d_body_entered(body):
 	if body.name!="Player":
 		damage(100)
+
+
+func _on_shield_area_entered(area):
+	if "damage" in area and not area.is_in_group("friendly") and shields>=0:
+		shields-= area.damage
+		area.queue_free()
+		
+
+
+func _on_shield_body_entered(body):
+	if body!=self and not body.is_in_group("friendly") and body.has_method("damage") and shields>=0:
+		shields-=100
+		body.damage(100)
+
+		

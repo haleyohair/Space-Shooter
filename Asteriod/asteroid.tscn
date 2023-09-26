@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3g14vmlpjfjq"]
+[gd_scene load_steps=4 format=3 uid="uid://d3g14vmlpjfjq"]
 
 [ext_resource type="Script" path="res://Asteriod/Asteroid.gd" id="1_1ge7l"]
-[ext_resource type="Texture2D" uid="uid://c008mbg51odgt" path="res://Assets/Meteor.png" id="2_aarbp"]
+[ext_resource type="Texture2D" uid="uid://bexei8ly7fhsb" path="res://Assets/rock2.png" id="2_75xku"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cefra"]
+radius = 33.0151
 
 [node name="Asteroid" type="CharacterBody2D"]
 script = ExtResource("1_1ge7l")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_aarbp")
+texture = ExtResource("2_75xku")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(21, -17.3, 21, -14.3, 29.1, 4, 26.3, 4, 20.3, 18, 18.6, 18, 2.6, 28, -2.5, 28, -21, 17.1, -21, 14.3, -29.1, -4, -26.2, -4, -17.2, -21, -14.5, -21, -4, -26.2, -4, -29.2)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_cefra")
