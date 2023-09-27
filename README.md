@@ -1,6 +1,8 @@
 # Space-Shooter
 Project 2 for MSCH-C220
+
 9/27/23
+
 A simple and fun 2D space shooter game.
 
 ## Implementation
