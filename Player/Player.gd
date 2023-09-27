@@ -11,7 +11,7 @@ var Effects=null
 var Explosion=load("res://Effects/explosion.tscn")
 
 var shields=0
-var shields_regen=0.01
+var shields_regen=0.1
 var shield_max=50.0
 var shield_textures= [
 	preload("res://Assets/fullshield1.png"),

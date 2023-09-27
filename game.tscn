@@ -1,5 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://bttsuaylh14ip"]
+[gd_scene load_steps=10 format=3 uid="uid://bttsuaylh14ip"]
 
+[ext_resource type="Texture2D" uid="uid://4k56jbswic8u" path="res://Assets/newbackground.png" id="1_ax55f"]
 [ext_resource type="PackedScene" uid="uid://bis0xjgwn8ocm" path="res://Player/player.tscn" id="1_miwp6"]
 [ext_resource type="Script" path="res://Player/Player_Container.gd" id="2_5sdyq"]
 [ext_resource type="PackedScene" uid="uid://d3g14vmlpjfjq" path="res://Asteriod/asteroid.tscn" id="2_ogvhe"]
@@ -10,6 +11,12 @@
 [ext_resource type="FontFile" uid="uid://ctsyghxpjxves" path="res://Assets/Hyperspace.otf" id="8_6n3ll"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(-713, -441)
+scale = Vector2(1.06917, 0.544931)
+texture = ExtResource("1_ax55f")
+centered = false
 
 [node name="Asteroid_Container" type="Node2D" parent="."]
 
@@ -73,10 +80,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 1.0
-offset_right = 4.0
-offset_bottom = 1.0
+offset_left = 1.0
+offset_top = -1.0
+offset_right = 1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 
