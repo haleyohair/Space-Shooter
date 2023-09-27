@@ -10,6 +10,8 @@ var Bullet=load("res://Player/bullet.tscn")
 var Effects=null
 var Explosion=load("res://Effects/explosion.tscn")
 
+var reloaded=true
+
 var shields=0
 var shields_regen=0.1
 var shield_max=50.0
@@ -36,8 +38,8 @@ func _physics_process(_delta):
 	velocity+=get_input()*speed
 	velocity=velocity.normalized()*clamp(velocity.length(), 0, max_speed)
 	
-	position.x=wrapf(position.x, 0, Global.VP.x)
-	position.y=wrapf(position.y, 0, Global.VP.y)
+	position.x=wrapf(position.x, 0, 3492)
+	position.y=wrapf(position.y, 0, 2010)
 	velocity=velocity.normalized() * clamp(velocity.length(), 0, max_speed)
 	
 	print(velocity.length())
@@ -59,14 +61,18 @@ func _physics_process(_delta):
 	else:
 		$Shield.hide()
 	
-	if Input.is_action_just_pressed("Shoot"):
-		var bullet=Bullet.instantiate()
-		bullet.position=position+nose.rotated(rotation)
-		bullet.rotation=rotation
-		@warning_ignore("shadowed_variable")
-		var Effects=get_node_or_null("/root/Game/Effects")
-		if Effects!=null:
-			Effects.add_child(bullet)
+	if Input.is_action_pressed("Shoot"):
+		if Global.ammo > 0 and reloaded:
+			var bullet=Bullet.instantiate()
+			bullet.position=position+nose.rotated(rotation)
+			bullet.rotation=rotation
+			@warning_ignore("shadowed_variable")
+			var Effects=get_node_or_null("/root/Game/Effects")
+			if Effects!=null:
+				Global.update_ammo(-1)
+				reloaded=false
+				$Reload.start()
+				Effects.add_child(bullet)
 			
 func damage(d):
 	health=health-d
@@ -100,3 +106,7 @@ func _on_shield_body_entered(body):
 		body.damage(100)
 
 		
+
+
+func _on_reload_timeout():
+	reloaded = true

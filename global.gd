@@ -4,6 +4,7 @@ var VP=Vector2.ZERO
 var score=0
 var lives=0
 var time=0
+var ammo=0
 
 func _ready():
 	process_mode=Node.PROCESS_MODE_ALWAYS
@@ -38,6 +39,15 @@ func update_lives(l):
 	if lives<0:
 		get_tree().change_scene_to_file("res://UI/end_game.tscn")
 	
+func update_ammo(a):
+	ammo+=a
+	var hud=get_node_or_null("/root/Game/UI/HUD")
+	if hud!=null:
+		hud.update_ammo()
+	if lives<0:
+		get_tree().change_scene_to_file("res://UI/end_game.tscn")
+	
+	
 func update_score(s):
 	score+=s
 	var hud= get_node_or_null("/root/Game/UI/HUD")
@@ -58,4 +68,5 @@ func reset():
 	score=0
 	time=30
 	lives=5
+	ammo=20
 

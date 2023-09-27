@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bttsuaylh14ip"]
+[gd_scene load_steps=11 format=3 uid="uid://bttsuaylh14ip"]
 
 [ext_resource type="Texture2D" uid="uid://4k56jbswic8u" path="res://Assets/newbackground.png" id="1_ax55f"]
 [ext_resource type="PackedScene" uid="uid://bis0xjgwn8ocm" path="res://Player/player.tscn" id="1_miwp6"]
 [ext_resource type="Script" path="res://Player/Player_Container.gd" id="2_5sdyq"]
 [ext_resource type="PackedScene" uid="uid://d3g14vmlpjfjq" path="res://Asteriod/asteroid.tscn" id="2_ogvhe"]
 [ext_resource type="PackedScene" uid="uid://kx8irh30xrkt" path="res://Enemy/enemy.tscn" id="3_4ev4j"]
+[ext_resource type="PackedScene" uid="uid://b1ccjgrcxarqo" path="res://Player/ammo.tscn" id="3_nvsbi"]
 [ext_resource type="Script" path="res://UI/HUD.gd" id="5_ec7vv"]
 [ext_resource type="FontFile" uid="uid://bvn8ig2y1i7g5" path="res://Assets/Hyperspace Bold.otf" id="5_lgym2"]
 [ext_resource type="Script" path="res://UI/Menu.gd" id="7_gm7bq"]
@@ -13,8 +14,7 @@
 [node name="Game" type="Node2D"]
 
 [node name="Background" type="Sprite2D" parent="."]
-position = Vector2(-713, -441)
-scale = Vector2(1.06917, 0.544931)
+scale = Vector2(1.46417, 0.670938)
 texture = ExtResource("1_ax55f")
 centered = false
 
@@ -27,6 +27,9 @@ position = Vector2(100, 100)
 position = Vector2(900, 600)
 
 [node name="Effects" type="Node2D" parent="."]
+
+[node name="Ammo" parent="Effects" instance=ExtResource("3_nvsbi")]
+position = Vector2(1000, 200)
 
 [node name="Player_Container" type="Node2D" parent="."]
 script = ExtResource("2_5sdyq")
@@ -89,6 +92,24 @@ grow_vertical = 2
 
 [node name="Timer" type="Timer" parent="UI/HUD"]
 autostart = true
+
+[node name="Ammo" type="Label" parent="UI/HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -210.0
+offset_top = -40.0
+offset_right = -10.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("5_lgym2")
+theme_override_font_sizes/font_size = 20
+text = "Ammo: "
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="Menu" type="Control" parent="UI"]
 process_mode = 3
